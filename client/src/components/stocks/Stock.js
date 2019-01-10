@@ -112,11 +112,7 @@ class Stock extends Component {
                     </View>
                 </View>
             )
-
         } else {
-            
-
-            
             return (
                 <View style={styles.container}>
                     <View style={styles.stockInfo}>

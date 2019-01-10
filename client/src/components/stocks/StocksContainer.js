@@ -25,7 +25,7 @@ class StocksContainer extends Component {
     }
 
     tickerInterval = () => {
-        setInterval(() => this.grabTickers(), 30000)
+        setInterval(() => this.grabTickers(), 5000)
     }
     componentWillMount = () => {
         this.grabTickers()
@@ -57,7 +57,7 @@ class StocksContainer extends Component {
                 isVisible: true
             })
         }
-
+        console.log(this.props.username, 'inside of StocksContainer')
         
         return (
             <View style={styles.container}>

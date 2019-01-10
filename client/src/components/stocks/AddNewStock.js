@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 import {Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 export default class AddNewStock extends Component {
@@ -22,6 +23,17 @@ export default class AddNewStock extends Component {
             })
         }
 
+        const addStock = () => {
+            axios.post('http://localhost:5000/newStock', {
+                username: this.props.username,
+                newTicker: this.state.newTicker
+            }).then(response => {
+                console.log(response)
+            }).catch(e => console.log(e))
+
+            // alterVisibility()
+        }
+        console.log(this.state.newTicker, 'inside add new stock')
         if (this.props.isVisible && this.state.isVisible) {
             return (
                 <View style={styles.modal}>
@@ -31,7 +43,7 @@ export default class AddNewStock extends Component {
 
                         <TextInput style={styles.input} autoCapitalize={'none'} placeholder={'Ticker'} placeholderTextColor={'rgba(0, 0, 0, 0.5)'} onChangeText={(newTicker) => this.setState({...this.state, newTicker})} />
                     </View>
-                        <TouchableOpacity onPress={() => alterVisibility()} style={styles.addButton}>
+                        <TouchableOpacity onPress={() => addStock()} style={styles.addButton}>
                             <Text>Add Stock</Text>
                         </TouchableOpacity>
                     </View>
