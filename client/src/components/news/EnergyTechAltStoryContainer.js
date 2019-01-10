@@ -30,16 +30,16 @@ export default class EnergyTechAltStoryContainer extends Component {
 
         let storyArr = () => {
             let altStory = this.state.altStories
-        return (
-            <View style={styles.storyContainer}>
-                <EnergyTechAltStory title={altStory.title}
-                author={altStory.author}
-                content={altStory.content}
-                image={altStory.imageurl}
-                source={altStory.sourceurl}/>
-            </View>
-            )
-        }
+            return (
+                <View style={styles.storyContainer}>
+                    <EnergyTechAltStory title={altStory.title}
+                    author={altStory.author}
+                    content={altStory.content}
+                    image={altStory.imageurl}
+                    source={altStory.sourceurl}/>
+                </View>
+                )
+            }
 
 
         return (

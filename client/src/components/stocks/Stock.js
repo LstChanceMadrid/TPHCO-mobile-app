@@ -44,9 +44,9 @@ class Stock extends Component {
                             monthData : monthData
                         }
                     })
-                })
-            })
-        })
+                }).catch(e => console.log(e))
+            }).catch(e => console.log(e))
+        }).catch(e => console.log(e))
     }
 
     componentWillMount = () => {
@@ -68,7 +68,6 @@ class Stock extends Component {
            return (
             <View style={styles.container}>
                 <View style={styles.stockInfo}>
-                
                     <Text style={styles.symbol}>{symbol}</Text>
 
                     <Text style={styles.name} numberOfLines={1} ellipsizeMode={"tail"}>{name}</Text>
@@ -78,7 +77,6 @@ class Stock extends Component {
                     <StockGraph symbol={symbol} graphLine={'green'} graphFill={'rgba(0, 255, 0, 0.2)'} monthData={monthData} />
                 </View>
                 
-
                 <View style={styles.stockPrice}>
                     <Text style={styles.current}>{current}</Text>
 

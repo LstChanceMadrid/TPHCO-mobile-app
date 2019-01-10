@@ -100,8 +100,7 @@ app.post('/timeStamp', (req, res) => {
 app.post('/newStock', (req, res) => {
     let newTicker = req.body.newTicker
     let username = req.body.username
-    console.log(username)
-    console.log(newTicker)
+
     axios.get(`https://api.iextrading.com/1.0/stock/${newTicker}/chart/1m`).then(response => {
 
         if (response.data === 'Unknown symbol') {

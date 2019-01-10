@@ -27,7 +27,6 @@ export default class AddStockToggle extends Component {
 const styles = StyleSheet.create({
     buttonText: {
         flex: 1,
-
         backgroundColor: 'rgba(200, 200, 200, 0.5)'
     }
 })

@@ -29,7 +29,6 @@ class Register extends Component {
   }
   
   name = (e) => {
-    console.log(e.target.value)
     this.setState({
       ...this.state,
       firstName : e.target.value

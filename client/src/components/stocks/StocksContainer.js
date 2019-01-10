@@ -1,10 +1,12 @@
 import axios from 'axios'
+import AddNewStock from './AddNewStock';
+import AddStockToggle from './AddStockToggle'
 import React, {Component} from 'react';
-import {Modal, StyleSheet, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
 import StocksHeader from '../headers/StocksHeader'
 import Stock from './Stock'
-import AddStockToggle from './AddStockToggle'
-import AddNewStock from './AddNewStock';
+
+
 
 class StocksContainer extends Component {
     constructor(props) {
@@ -27,6 +29,7 @@ class StocksContainer extends Component {
     tickerInterval = () => {
         setInterval(() => this.grabTickers(), 5000)
     }
+    
     componentWillMount = () => {
         this.grabTickers()
     }
@@ -38,9 +41,6 @@ class StocksContainer extends Component {
     componentWillUnmount = () => {
         clearInterval(this.tickerInterval())
     }
-
-
-
 
     render() {
         let tickerArray = []
@@ -57,8 +57,7 @@ class StocksContainer extends Component {
                 isVisible: true
             })
         }
-        console.log(this.props.username, 'inside of StocksContainer')
-        
+
         return (
             <View style={styles.container}>
                 <StocksHeader />

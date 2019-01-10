@@ -117,7 +117,6 @@ class AgreeToTerms extends Component {
 
   render() {
 
-    console.log('hello')
     return (
       <View style={styles.container}>
         <Image style={styles.logo} resizeMode={'contain'} source={require('../../styles/images/tphco.png')} />

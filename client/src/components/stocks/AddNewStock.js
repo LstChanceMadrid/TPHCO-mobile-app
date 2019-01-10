@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Image, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 export default class AddNewStock extends Component {
 
@@ -11,9 +11,6 @@ export default class AddNewStock extends Component {
             isVisible: true
         }
     }
-
-
-
 
     render() {
         const alterVisibility = () => {
@@ -28,12 +25,12 @@ export default class AddNewStock extends Component {
                 username: this.props.username,
                 newTicker: this.state.newTicker
             }).then(response => {
-                console.log(response)
+                console.log(response.data)
             }).catch(e => console.log(e))
 
             // alterVisibility()
         }
-        console.log(this.state.newTicker, 'inside add new stock')
+        
         if (this.props.isVisible && this.state.isVisible) {
             return (
                 <View style={styles.modal}>
