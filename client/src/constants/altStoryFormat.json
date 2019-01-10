@@ -1,0 +1,19 @@
+{
+    "altStory" : [
+        {
+
+            "date": "date",
+            "author": "author",
+            "title": "title of the story",
+            "imageURL": "an image url",
+            "story": "the body content of the story"
+        },
+        {
+            "date": "date",
+            "author": "author",
+            "title": "title of the story",
+            "imageURL": "an image url",
+            "story": "the body content of the story"
+        }
+    ]
+}
