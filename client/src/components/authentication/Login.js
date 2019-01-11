@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
 import axios from 'axios'
+import { connect } from 'react-redux'
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import * as screen from '../../constants/screenLayouts'
+
 
 
 class Login extends Component {
@@ -27,8 +27,7 @@ class Login extends Component {
   }
 
   render() {
-
-    
+  
     const authenticate = async () => {
       let usernameOrEmail = this.state.usernameOrEmail
       let password = this.state.password

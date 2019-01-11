@@ -111,6 +111,13 @@ app.post('/newStock', (req, res) => {
     }).catch(e => console.log(e))
 })
 
+app.post('/removeStock', (req, res) => {
+    let removeTicker = req.body.newTicker
+    let username = req.body.username
+
+    db.any(`UPDATE users SET tickers = ARRAY_REMOVE(tickers, '${removeTicker}') WHERE username = '${username}'`).catch(e => console.log(e))
+})
+
 app.post('/altstory', (req, res) => {
     let title = req.body.title
 
@@ -156,21 +163,16 @@ app.post('/tickers', (req, res) => {
 
 const makeitup = () => {
 
-    db.one(`SELECT tickers FROM users WHERE username = $1`, ['g']).then(response => {
-console.log(response.tickers)
-    }).catch(e => {
-        if (e.name === "QueryResultError") {
-            console.log('authentication denied')
+    // let removeTicker = req.body.newTicker
+    // let username = req.body.username
+    db.any(`UPDATE users SET tickers = ARRAY_REMOVE(tickers, 'aapl') WHERE username = 'mmadrid'`).then(response => {
+        console.log(response)
+        }).catch(e => console.log(e))
 
-            let error = `this username/email does not exist or connected password is incorrect`
-            res.json({isAuthenticated: false, error: error})
-        } else {
-            console.log('alt error', e)
-
-            let error = `We're Sorry! We are having some minor difficulties. Please wait a few minutes and then try again.`
-            res.json({error:error})
-        }
-    })
 }
+
+
+
+
 
 app.listen(port, () => console.log('server up'))

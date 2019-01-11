@@ -31,7 +31,7 @@ export default class AddNewStock extends Component {
             // alterVisibility()
         }
         
-        if (this.props.isVisible && this.state.isVisible) {
+
             return (
                 <View style={styles.modal}>
                     <View style={styles.modal}>
@@ -46,9 +46,6 @@ export default class AddNewStock extends Component {
                     </View>
                 </View>
             )
-        } else {
-            return null
-        }
     }
 }
 
@@ -56,13 +53,10 @@ const styles = StyleSheet.create({
     modal: {
         flex: 1,
         flexDirection:'row',
-        marginTop: 75,
         backgroundColor: 'rgba(200, 200, 200, 0.5)',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         height: 50,
-        zIndex: 1
-
     },
     inputContainer: {
         flex: 1,

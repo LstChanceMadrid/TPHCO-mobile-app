@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import EnergyTechAltStory from './EnergyTechAltStory'
-import axios from 'axios'
+import { StyleSheet, Text, View } from 'react-native'
 
+import axios from 'axios'
+import EnergyTechAltStory from './EnergyTechAltStory'
 
 export default class EnergyTechAltStoryContainer extends Component {
     constructor(props) {
@@ -40,7 +40,6 @@ export default class EnergyTechAltStoryContainer extends Component {
                 </View>
                 )
             }
-
 
         return (
             <View style={styles.container}>

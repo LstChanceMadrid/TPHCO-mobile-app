@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import {StyleSheet, Text, View, Button, Image, TouchableOpacity} from 'react-native';
+import { Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import * as screen from '../../constants/screenLayouts'
 
 
 // type Props = {}; Component<Props>

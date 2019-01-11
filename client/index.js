@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { AsyncStorage } from 'react-native'
 import { createStore } from 'redux'
 import { Navigation } from 'react-native-navigation'
@@ -25,7 +26,9 @@ const initialState = {
         lastName: '',
         position: '',
         company: '',
-    }
+    },
+    isRemoveVisible: false,
+    isAddVisible: false,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -42,24 +45,6 @@ Navigation.registerComponent('AgreeToTerms', () => (props) => (
     </Provider>
 ), () => AgreeToTerms)
 
-Navigation.registerComponent('Register', () => (props) => (
-    <Provider store={store}>
-        <Register {...props} />
-    </Provider>
-), () => Register)
-
-Navigation.registerComponent('TermsOfService', () => (props) => (
-    <Provider store={store}>
-        <TermsOfService {...props} />
-    </Provider>
-), () => TermsOfService)
-
-Navigation.registerComponent('Login', () => (props) => (
-    <Provider store={store}>
-        <Login {...props} />
-    </Provider>
-), () => Login)
-
 Navigation.registerComponent('Dashboard', () => (props) => (
     <Provider store={store}>
         <Dashboard {...props} />
@@ -72,17 +57,25 @@ Navigation.registerComponent('EnergyTechWeekly', () => (props) => (
     </Provider>
 ), () => EnergyTechWeekly)
 
-Navigation.registerComponent('AgreeToTerms', () => (props) => (
+Navigation.registerComponent('Login', () => (props) => (
     <Provider store={store}>
-        <AgreeToTerms {...props} />
+        <Login {...props} />
     </Provider>
-), () => AgreeToTerms)
+), () => Login)
 
-// Navigation.registerComponent('Register', () => Register, Provider, store)
-// Navigation.registerComponent('TermsOfService', () => TermsOfService, Provider, store)
-// Navigation.registerComponent('Login', () => Login, Provider, store)
-// Navigation.registerComponent('Dashboard', () => Dashboard, Provider, store)
-// Navigation.registerComponent('EnergyTechWeekly', () => EnergyTechWeekly, Provider, store)
+Navigation.registerComponent('Register', () => (props) => (
+    <Provider store={store}>
+        <Register {...props} />
+    </Provider>
+), () => Register)
+
+Navigation.registerComponent('TermsOfService', () => (props) => (
+    <Provider store={store}>
+        <TermsOfService {...props} />
+    </Provider>
+), () => TermsOfService)
+
+
 
 _retrieveAsyncStorageLoginStatus = async () => {
     try {

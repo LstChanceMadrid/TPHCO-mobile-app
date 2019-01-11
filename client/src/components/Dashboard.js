@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import {StyleSheet, View, Image} from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import * as screen from '../constants/screenLayouts'
+
+import Footer from './footers/Footer'
 import News from './news/NewsContainer'
 import StocksContainer from './stocks/StocksContainer'
-import Footer from './footers/Footer'
+
 
 
 
@@ -32,13 +33,13 @@ class Dashboard extends Component {
     return (
       <View style={styles.container}>
 
-      <StocksContainer username={this.props.username} />
+        <StocksContainer username={this.props.username} />
 
-      <News />
-      
-      <Image style={styles.logo} resizeMode={'contain'} source={require('../styles/images/tphco.png')} />
+        <News />
+        
+        <Image style={styles.logo} resizeMode={'contain'} source={require('../styles/images/tphco.png')} />
 
-      <Footer component={this.props.componentId}/>
+        <Footer component={this.props.componentId}/>
       </View>
     );
   }
@@ -49,7 +50,6 @@ const mapStateToProps = state => {
     // username : state.username
   }
 }
-
 
 export default connect(mapStateToProps)(Dashboard)
 

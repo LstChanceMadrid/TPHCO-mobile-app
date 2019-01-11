@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import axios from 'axios'
-import * as screen from '../../constants/screenLayouts'
 
 
 class Register extends Component {

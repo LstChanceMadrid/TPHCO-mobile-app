@@ -1,10 +1,10 @@
 import axios from 'axios'
-import AddNewStock from './AddNewStock';
 import AddStockToggle from './AddStockToggle'
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
-import StocksHeader from '../headers/StocksHeader'
 import Stock from './Stock'
+import StocksHeader from '../headers/StocksHeader'
+
 
 
 
@@ -29,7 +29,7 @@ class StocksContainer extends Component {
     tickerInterval = () => {
         setInterval(() => this.grabTickers(), 5000)
     }
-    
+
     componentWillMount = () => {
         this.grabTickers()
     }
@@ -51,22 +51,13 @@ class StocksContainer extends Component {
             tickerArray.push(stockData)
         })
 
-        const alterVisibility = () => {
-            this.setState({
-                ...this.state,
-                isVisible: true
-            })
-        }
-
         return (
             <View style={styles.container}>
                 <StocksHeader />
-                <AddNewStock isVisible={this.state.isVisible} username={this.props.username} />
+                <AddStockToggle />
 
                 <ScrollView style={styles.stocksContainer}>
-                    <TouchableOpacity style={styles.addStock} onPress={() => alterVisibility()} >
-                        <AddStockToggle isVisible={this.state.isVisible} />
-                    </TouchableOpacity>
+                
                     {tickerArray}
                     <View style={{height: 55}}></View>
                 </ScrollView>
