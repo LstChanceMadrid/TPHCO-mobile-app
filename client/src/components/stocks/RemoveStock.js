@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
-export default class AddNewStock extends Component {
+export default class RemoveStock extends Component {
 
     constructor(props) {
         super(props)
@@ -20,8 +20,8 @@ export default class AddNewStock extends Component {
             })
         }
 
-        const addStock = () => {
-            axios.post('http://localhost:5000/newStock', {
+        const removeStock = () => {
+            axios.post('http://localhost:5000/removeStock', {
                 username: this.props.username,
                 newTicker: this.state.newTicker
             }).then(response => {
@@ -32,20 +32,21 @@ export default class AddNewStock extends Component {
         }
         
 
-            return (
-                <View style={styles.modal}>
-                    <View style={styles.modal}>
-                    <View style={styles.inputContainer}>
-                        <Text style={{color: 'blue'}}>Ticker:</Text>
+        return (
+            <View style={styles.modal}>
+            <TouchableOpacity onPress={() => alterVisibility()} style={styles.addButton}>
+                        <Text>Close</Text>
+                    </TouchableOpacity>
+                <View style={styles.inputContainer}>
+                    <Text style={{color: 'blue'}}>Ticker:</Text>
 
-                        <TextInput style={styles.input} autoCapitalize={'none'} placeholder={'Ticker'} placeholderTextColor={'rgba(0, 0, 0, 0.5)'} onChangeText={(newTicker) => this.setState({...this.state, newTicker})} />
-                    </View>
-                        <TouchableOpacity onPress={() => addStock()} style={styles.addButton}>
-                            <Text>Add Stock</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <TextInput style={styles.input} autoCapitalize={'none'} placeholder={'Ticker'} placeholderTextColor={'rgba(0, 0, 0, 0.5)'} onChangeText={(newTicker) => this.setState({...this.state, newTicker})} />
                 </View>
-            )
+                    <TouchableOpacity onPress={() => removeStock()} style={styles.addButton}>
+                        <Text>Remove Stock</Text>
+                    </TouchableOpacity>
+            </View>
+        )
     }
 }
 

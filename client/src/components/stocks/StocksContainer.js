@@ -1,9 +1,9 @@
 import axios from 'axios'
-import AddStockToggle from './AddStockToggle'
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
 import Stock from './Stock'
 import StocksHeader from '../headers/StocksHeader'
+import StockModalToggle from './StockModalToggle';
 
 
 
@@ -54,7 +54,7 @@ class StocksContainer extends Component {
         return (
             <View style={styles.container}>
                 <StocksHeader />
-                <AddStockToggle />
+                <StockModalToggle />
 
                 <ScrollView style={styles.stocksContainer}>
                 

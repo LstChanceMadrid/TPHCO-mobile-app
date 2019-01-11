@@ -139,8 +139,8 @@ class AgreeToTerms extends Component {
 const mapStateToProps = state => {
   return {
     ...state,
-    username : state.user.username,
-    email: state.user.email
+    // username : state.user.username,
+    // email: state.user.email
 
   }
 }

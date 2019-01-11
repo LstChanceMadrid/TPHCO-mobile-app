@@ -1,43 +1,35 @@
 import React from 'react'
 
 import { AsyncStorage } from 'react-native'
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
 
-
 import * as screen from './src/constants/screenLayouts'
+import AddStock from './src/components/stocks/AddStock'
 import AgreeToTerms from './src/components/terms/AgreeToTerms'
 import Dashboard from './src/components/Dashboard';
 import EnergyTechWeekly from './src/components/EnergyTechWeekly';
 import Login from './src/components/authentication/Login'
 import Register from './src/components/authentication/Register'
+import RemoveStock from './src/components/stocks/RemoveStock'
+import StockModalToggle from './src/components/stocks/StockModalToggle'
 import TermsOfService from './src/components/terms/TermsOfService';
 
+import reducer from './src/store/reducers'
+import rootReducer from './src/store/reducers';
 
-
-const initialState = {
-    isAuthenticated: false,
-    termsAccepted: false,
-    user: {
-        username: '',
-        email: '',
-        firstName: '',
-        lastName: '',
-        position: '',
-        company: '',
-    },
-    isRemoveVisible: false,
-    isAddVisible: false,
-}
-
-const rootReducer = (state = initialState, action) => {
-    return state
-}
 
 
 const store = createStore(rootReducer)
 
+
+
+Navigation.registerComponent('AddStock', () => (props) => (
+    <Provider store={store}>
+        <AddStock {...props} />
+    </Provider>
+), () => AddStock)
 
 Navigation.registerComponent('AgreeToTerms', () => (props) => (
     <Provider store={store}>
@@ -68,6 +60,18 @@ Navigation.registerComponent('Register', () => (props) => (
         <Register {...props} />
     </Provider>
 ), () => Register)
+
+Navigation.registerComponent('RemoveStock', () => (props) => (
+    <Provider store={store}>
+        <RemoveStock {...props} />
+    </Provider>
+), () => RemoveStock)
+
+Navigation.registerComponent('StockModalToggle', () => (props) => (
+    <Provider store={store}>
+        <StockModalToggle {...props} />
+    </Provider>
+), () => StockModalToggle)
 
 Navigation.registerComponent('TermsOfService', () => (props) => (
     <Provider store={store}>

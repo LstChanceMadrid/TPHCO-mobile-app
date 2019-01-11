@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import AddNewStock from './AddNewStock';
+import AddStock from './AddStock';
+import RemoveStock from './RemoveStock';
 
-export default class AddStockToggle extends Component {
+export default class stockModalToggle extends Component {
 
     constructor(props) {
         super(props)
@@ -36,13 +37,13 @@ export default class AddStockToggle extends Component {
         if  (this.state.isAddVisible) {
             return (
                 <View style={styles.stockModalToggle}>
-                    <AddNewStock />
+                    <AddStock />
                 </View> 
             )
         } else if (this.state.isRemoveVisible) {
             return (
                 <View style={styles.stockModalToggle}>
-                    <Text style={styles.buttonText}>HHHIIIIIIIIIIIIIII</Text>
+                    <RemoveStock />
                 </View> 
             )
         } else {
