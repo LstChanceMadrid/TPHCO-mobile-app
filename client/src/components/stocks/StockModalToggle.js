@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { connect } from 'react-redux'
+import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import AddStock from './AddStock';
 import RemoveStock from './RemoveStock';
+import * as actions from '../../store/actions'
 
-export default class stockModalToggle extends Component {
+class stockModalToggle extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             ...this.state,
-            isRemoveVisible: false,
             isAddVisible: false
         }
     }
@@ -17,6 +18,7 @@ export default class stockModalToggle extends Component {
     render() {
         const alterVisibility = (type) => {
             if (type === "add") {
+                this.props.openAddStock
                 this.setState({
                     ...this.state,
                     isAddVisible: true
@@ -24,23 +26,22 @@ export default class stockModalToggle extends Component {
             }
 
             if (type === "remove") {
+                this.props.openRemoveStock
                 this.setState({
                     ...this.state,
                     isRemoveVisible: true
                 })
             }
         }
-
-
             
 
-        if  (this.state.isAddVisible) {
+        if  (this.props.isAddVisible) {
             return (
                 <View style={styles.stockModalToggle}>
                     <AddStock />
                 </View> 
             )
-        } else if (this.state.isRemoveVisible) {
+        } else if (this.props.isRemoveVisible) {
             return (
                 <View style={styles.stockModalToggle}>
                     <RemoveStock />
@@ -49,10 +50,10 @@ export default class stockModalToggle extends Component {
         } else {
             return (
                 <View style={styles.stockModalToggle}>
-                    <TouchableOpacity onPress={() => alterVisibility('add')}>
+                    <TouchableOpacity onPress={this.props.openAddStock}>
                         <Text style={styles.buttonText}>Add Stock</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => alterVisibility('remove')}>
+                    <TouchableOpacity onPress={this.props.openRemoveStock}>
                         <Text style={styles.buttonText}>Remove Stock</Text>
                     </TouchableOpacity>
                 </View> 
@@ -60,6 +61,23 @@ export default class stockModalToggle extends Component {
         } 
     }
 }
+const mapStateToProps = state => {
+    return {
+        isAddVisible: state.isAddVisible,
+        isRemoveVisible: state.isRemoveVisible
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        openAddStock: () => dispatch(actions.openAddStock()),
+        openRemoveStock: () => dispatch(actions.openRemoveStock())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(stockModalToggle)
+
 
 const styles = StyleSheet.create({
     stockModalToggle: {
@@ -67,15 +85,21 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: 'blue',
+        backgroundColor: 'rgba(15, 15, 15, 1)',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         marginTop: 96,
-        zIndex:1
+        zIndex:1,
+        paddingBottom: 2
     },
     buttonText: {
-        color: 'white',
+        color: 'rgba(150, 150, 150, 1)',
         flex: 1,
-        backgroundColor: 'rgba(200, 200, 200, 0.5)'
+        backgroundColor: 'rgba(50, 50, 50, 0.5)',
+        // fontWeight: 'bold',
+        borderRadius: 5,
+        borderWidth: 2,
+        borderColor: 'black',
+        padding: 2
     }
 })

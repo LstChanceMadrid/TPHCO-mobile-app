@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {AsyncStorage, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 
@@ -13,6 +13,15 @@ class Login extends Component {
       ...this.state
     }
   }
+
+  _storeLoginStatus = async () => {
+    try {
+       const isLoggedIn = await AsyncStorage.setItem("isLoggedIn", 'true', res => {})
+    } catch(error){
+        console.log(error)
+    }
+
+}
 
   goToScreen = (screenName) => {
     Navigation.push(this.props.componentId, {
@@ -27,6 +36,7 @@ class Login extends Component {
   }
 
   render() {
+    
   
     const authenticate = async () => {
       let usernameOrEmail = this.state.usernameOrEmail
@@ -36,16 +46,34 @@ class Login extends Component {
         usernameOrEmail : usernameOrEmail,
         password : password
       }).then(response => {
-
+        console.log(response.data)
         if (response.data.isAuthenticated) {
-        Navigation.push(this.props.componentId, {
-          component: {
-            name: 'AgreeToTerms',
-            passProps: {
-              usernameOrEmail: this.state.usernameOrEmail
-            }
-            }
-          })
+          let username = response.data.user.username
+          let email = response.data.user.email
+          console.log(email)
+
+          
+
+            this._storeLoginStatus()
+
+            this.setState({
+              ...this.state,
+              username: username,
+              email: email
+            })
+
+          
+
+            Navigation.push(this.props.componentId, {
+              component: {
+                name: 'AgreeToTerms',
+                passProps: {
+                  username: this.state.username,
+                  email: this.state.email
+                }
+                }
+              })
+        
         } else {
           this.setState({
             ...this.state,

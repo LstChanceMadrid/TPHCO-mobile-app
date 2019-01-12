@@ -1,9 +1,10 @@
 import React from 'react'
 
 import { AsyncStorage } from 'react-native'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 
 import * as screen from './src/constants/screenLayouts'
 import AddStock from './src/components/stocks/AddStock'
@@ -16,12 +17,13 @@ import RemoveStock from './src/components/stocks/RemoveStock'
 import StockModalToggle from './src/components/stocks/StockModalToggle'
 import TermsOfService from './src/components/terms/TermsOfService';
 
-import reducer from './src/store/reducers'
 import rootReducer from './src/store/reducers';
 
 
+const middleware = [thunk]
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)))
 
 
 
@@ -83,9 +85,11 @@ Navigation.registerComponent('TermsOfService', () => (props) => (
 
 _retrieveAsyncStorageLoginStatus = async () => {
     try {
-        const response = await AsyncStorage.getItem('isLoggedIn')
+        const isLoggedIn = await AsyncStorage.getItem('isLoggedIn')
+        const username = await AsyncStorage.getItem('username')
+        const email = await AsyncStorage.getItem('email')
 
-        if (response) {
+        if (JSON.parse(isLoggedIn)) {
             Navigation.setRoot({
                 root : {
                     stack: {
@@ -120,18 +124,15 @@ _retrieveAsyncStorageLoginStatus = async () => {
     }
 }
 
-_storeData = async () => {
-    try {
-        await AsyncStorage.setItem('isLoggedIn', true) 
-    } catch(error){
-        console.log(error)
-    }
-}
+
 
 
 
 Navigation.events().registerAppLaunchedListener(() => {
     
+
     _retrieveAsyncStorageLoginStatus()
+
+    
     
 })

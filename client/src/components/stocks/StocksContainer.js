@@ -14,7 +14,6 @@ class StocksContainer extends Component {
         this.state = {
             ...this.state,
             tickers: [],
-            isVisible: false
         }
     }
 
@@ -31,15 +30,16 @@ class StocksContainer extends Component {
     }
 
     componentWillMount = () => {
-        this.grabTickers()
+        
     }
 
     componentDidMount = () => {
+        this.grabTickers()
         this.tickerInterval()
     }
 
     componentWillUnmount = () => {
-        clearInterval(this.tickerInterval())
+        // clearInterval(this.tickerInterval())
     }
 
     render() {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 1)',
     },
     stocksContainer : {
-        paddingTop: 55,
+        paddingTop: 65,
         paddingBottom: 55
     },
     text : {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { AsyncStorage, Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 
@@ -11,6 +11,36 @@ class AgreeToTerms extends Component {
     super(props)
     this.state = {
       ...this.state
+    }
+  }
+
+  componentWillMount = () => {
+    
+    
+  }
+
+  componentDidMount = async () =>{
+    if (!this.props.username) {
+      let username = await AsyncStorage.getItem("username")
+      let email = await AsyncStorage.getItem("email")
+      console.log(username)
+      this._storeData(username, email)
+    } else {
+      this._storeData(this.props.username, this.props.email)
+      console.log(this.props.username)
+      console.log(this.props.email)
+    }
+    
+  }
+
+  
+  _storeData = async (username, email) => {
+    try {
+        await AsyncStorage.setItem("isLoggedIn", 'true', res => {})
+        await AsyncStorage.setItem("username", `${username}`, res => {})
+        await AsyncStorage.setItem("email", `${email}`, res => {})
+    } catch(error){
+        console.log(error)
     }
   }
 
@@ -30,21 +60,40 @@ class AgreeToTerms extends Component {
     })
   }
 
-  acceptTerms = () => {
-    axios.post('http://localhost:5000/timeStamp', {
-      usernameOrEmail: this.props.usernameOrEmail
-    }).then(response => {
-      let username = response.data.username
-      let email = response.data.email
+  
 
+
+
+
+  acceptTerms = async () => {
+    if (!this.props.username) {
+      let status = await AsyncStorage.getItem('isLoggedIn', res => {
+      })
+      console.log(status)
+      let username = await AsyncStorage.getItem('username')
+      let email = await AsyncStorage.getItem('email')
+      
       this.setState({
         ...this.state,
         username: username,
         email: email
       })
 
-      navigate(this.state.username, this.state.email)
-    })
+      await axios.post('http://localhost:5000/timeStamp', {
+            username: this.state.username,
+            email: this.state.email
+          }).catch(e => console.log(error))
+    } else {
+      await axios.post('http://localhost:5000/timeStamp', {
+        username: this.props.username,
+        email: this.props.email
+      }).catch(e => console.log(error))
+    }
+    
+
+
+
+      
 
     navigate = (username, email) => {
 
@@ -110,12 +159,13 @@ class AgreeToTerms extends Component {
         }
       })
     }
+    navigate(this.props.username, this.props.email)
   }
   
   
 
   render() {
-
+    this._storeData()
     return (
       <View style={styles.container}>
         <Image style={styles.logo} resizeMode={'contain'} source={require('../../styles/images/tphco.png')} />

@@ -1,4 +1,5 @@
 import {combineReducers } from 'redux'
+import * as actionTypes  from './actionTypes'
 
 export const initialState = {
     isAuthenticated: false,
@@ -17,7 +18,37 @@ export const initialState = {
 
 const rootReducer = (state = initialState, action) => {
 
-            return state
+    if (action.type = actionTypes.CLOSE_REMOVE_STOCK) {
+        return {
+            ...state,
+            isRemoveVisible: false
+        }
+    }
+
+    if (action.type = actionTypes.CLOSE_ADD_STOCK) {
+        return {
+            ...state,
+            isAddVisible: false
+        }
+    }
+
+    if (action.type = actionTypes.OPEN_REMOVE_STOCK) {
+        return {
+            ...state,
+            isRemoveVisible: true
+        }
+    }
+
+    if (action.type = actionTypes.OPEN_ADD_STOCK) {
+        return {
+            ...state,
+            isAddVisible: true
+        }
+    }
+
+
+
+    return state
 }
 
 

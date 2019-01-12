@@ -2,24 +2,22 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import * as action from '../../store/actions'
 
 class AddStock extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            ...this.state,
-            isVisible: true
+            ...this.state
         }
     }
 
+    componentWillReceiveProps = () => {
+        this.props.isAddVisible
+    }
+
     render() {
-        const alterVisibility = () => {
-            this.setState({
-                ...this.state,
-                isAddVisible: false
-            })
-        }
 
         const addStock = () => {
             axios.post('http://localhost:5000/newStock', {
@@ -35,7 +33,7 @@ class AddStock extends Component {
 
         return (
             <View style={styles.modal}>
-                    <TouchableOpacity onPress={() => alterVisibility()} style={styles.addButton}>
+                    <TouchableOpacity onPress={this.props.closeAddStock} style={styles.addButton}>
                         <Text>Close</Text>
                     </TouchableOpacity>
                 <View style={styles.inputContainer}>
@@ -58,7 +56,13 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AddStock)
+const mapDispatchToProps = dispatch => {
+    return {
+        closeAddStock: () => dispatch(action.closeAddStock)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddStock)
 
 
 const styles = StyleSheet.create({
