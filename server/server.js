@@ -59,7 +59,7 @@ app.post('/login', (req, res) => {
     db.one(`SELECT username, email, password FROM users WHERE username = $1 OR email = $1`, [usernameOrEmail]).then(response => {
         bcrypt.compare(password, response.password).then(result => {
         if (result) {
-            res.json({isAuthenticated:true, user: response.data})
+            res.json({isAuthenticated:true, user: response})
         } else {
             res.json({isAuthenticated: false})
         }
@@ -80,9 +80,9 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/timeStamp', (req, res) => {
-    let usernameOrEmail = req.body.usernameOrEmail
+    let username = req.body.username
 
-    db.one('SELECT id, username, email FROM users WHERE username = $1 OR email = $1', [usernameOrEmail]).then(response => {
+    db.one('SELECT id, username, email FROM users WHERE username = $1', [username]).then(response => {
 
         let username = response.username
         let email = response.email
