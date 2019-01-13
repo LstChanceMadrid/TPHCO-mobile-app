@@ -4,7 +4,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 import Footer from './footers/Footer'
-import News from './news/NewsContainer'
+import NewsContainer from './news/NewsContainer'
 import StocksContainer from './stocks/StocksContainer'
 
 
@@ -33,11 +33,9 @@ class Dashboard extends Component {
     return (
       <View style={styles.container}>
 
-        <StocksContainer username={this.props.username} />
+        <StocksContainer style={styles.stocksContainer} username={this.props.username} />
 
-        <News />
-        
-        <Image style={styles.logo} resizeMode={'contain'} source={require('../styles/images/tphco.png')} />
+        <NewsContainer style={styles.newsContainer} />
 
         <Footer component={this.props.componentId}/>
       </View>
@@ -61,13 +59,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 75
   },
-  logo: {
-    width: 300,
-    height: 200,
-    // tintColor: 'rgba(0, 0, 0, 1)',
-    marginLeft: 'auto',
-    marginRight: 'auto'
+  stocksContainer: {
+    height: '60%'
   },
+  newsContainer: {
+    height: '40%'
+  }, 
   text : {
     color: 'white'
   }

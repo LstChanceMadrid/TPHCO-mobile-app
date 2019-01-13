@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import NewsHeader from '../headers/NewsHeader'
+import NewsArticle from './NewsArticle';
 
-export default class News extends Component {
+export default class NewsContainer extends Component {
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <NewsHeader />
                 
                 <ScrollView>
-                    <Text style={styles.text}>News API</Text>
+                    <NewsArticle />
+                    <NewsArticle />
                 </ScrollView>
             </View>
         )
@@ -17,6 +19,12 @@ export default class News extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
+
+    },
     text : {
         color : 'white'
     }

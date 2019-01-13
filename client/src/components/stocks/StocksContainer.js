@@ -59,7 +59,7 @@ class StocksContainer extends Component {
                 <ScrollView style={styles.stocksContainer}>
                 
                     {tickerArray}
-                    <View style={{height: 55}}></View>
+                    <View style={{height: 35}}></View>
                 </ScrollView>
                 
             </View>
@@ -74,9 +74,10 @@ const styles = StyleSheet.create({
         flex : 1,
         justifyContent: 'flex-start',
         backgroundColor: 'rgba(0, 0, 0, 1)',
+        paddingBottom: '50%'
     },
     stocksContainer : {
-        paddingTop: 65,
+        paddingTop: 55,
         paddingBottom: 55
     },
     text : {

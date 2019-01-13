@@ -3,12 +3,17 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
+const NewsAPI = require('newsapi');
 const pgp = require('pg-promise')();
 const secret = require('./secrets')
+
+
+
 
 const app = express()
 const DATABASE_URL = secret.databaseSecret
 const db = pgp(DATABASE_URL);
+const newsapi = new NewsAPI(secret.newsAPISecret);
 const port = process.env.PORT || 5000
 const saltRounds = 10;
 

@@ -36,7 +36,7 @@ class AgreeToTerms extends Component {
   
   _storeData = async (username, email) => {
     try {
-        await AsyncStorage.setItem("isLoggedIn", 'true', res => {})
+        await AsyncStorage.setItem("isLoggedIn", 'false', res => {})
         await AsyncStorage.setItem("username", `${username}`, res => {})
         await AsyncStorage.setItem("email", `${email}`, res => {})
     } catch(error){

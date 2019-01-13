@@ -9,7 +9,7 @@ class NewsHeader extends Component {
             <View style={styles.nHContainer}>
                 <Text style={styles.nHTitle}>TOP STORIES</Text>
 
-                <Text style={styles.nHDate}>From Apple News</Text>
+                <Text style={styles.nHDate}>From NewsAPI.org</Text>
             </View>
         )
     }
