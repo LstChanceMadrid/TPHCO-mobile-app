@@ -7,9 +7,6 @@ const NewsAPI = require('newsapi');
 const pgp = require('pg-promise')();
 const secret = require('./secrets')
 
-
-
-
 const app = express()
 const DATABASE_URL = secret.databaseSecret
 const db = pgp(DATABASE_URL);
@@ -103,24 +100,24 @@ app.post('/timeStamp', (req, res) => {
 })
 
 app.post('/newStock', (req, res) => {
-    let newTicker = req.body.newTicker
+    let handleTicker = req.body.handleTicker
     let username = req.body.username
 
-    axios.get(`https://api.iextrading.com/1.0/stock/${newTicker}/chart/1m`).then(response => {
+    axios.get(`https://api.iextrading.com/1.0/stock/${handleTicker}/chart/1m`).then(response => {
 
         if (response.data === 'Unknown symbol') {
             res.json({errorMessage: 'Unknown symbol'})
         } else {
-            db.one(`UPDATE users SET tickers = tickers || '{${newTicker}}' WHERE username = $1`, [username]).catch(e => console.log(e))
+            db.one(`UPDATE users SET tickers = tickers || '{${handleTicker}}' WHERE username = '${username}'`).catch(e => console.log(e))
         }
     }).catch(e => console.log(e))
 })
 
 app.post('/removeStock', (req, res) => {
-    let removeTicker = req.body.newTicker
+    let handleTicker = req.body.handleTicker
     let username = req.body.username
 
-    db.any(`UPDATE users SET tickers = ARRAY_REMOVE(tickers, '${removeTicker}') WHERE username = '${username}'`).catch(e => console.log(e))
+    db.any(`UPDATE users SET tickers = ARRAY_REMOVE(tickers, '${handleTicker}') WHERE username = '${username}'`).catch(e => console.log(e))
 })
 
 app.post('/altstory', (req, res) => {
@@ -159,23 +156,38 @@ app.post('/tickers', (req, res) => {
 // }).catch(e => console.log(e))
 
 
+app.post('/api/newsArticles', (req, res) => {
+    let today = new Date().toISOString().slice(0,10)
+
+    newsapi.v2.everything({
+        sources: 'business-insider',
+        q: 'gas',
+        from: today,
+        to: today
+      }).then(response => {
+          console.log(response)
+        res.json({articles: response})
+    }).catch(e=>console.log(e))
+      
+})
 
 
 
 
-
-
+console.log(new Date().toISOString().slice(0,10))
 
 const makeitup = () => {
+    let today = new Date().toISOString().slice(0,10)
 
-    // let removeTicker = req.body.newTicker
-    // let username = req.body.username
-    db.any(`UPDATE users SET tickers = ARRAY_REMOVE(tickers, 'aapl') WHERE username = 'mmadrid'`).then(response => {
-        console.log(response)
-        }).catch(e => console.log(e))
-
+    newsapi.v2.everything({
+        sources: 'business-insider',
+        q: 'gas',
+        from: '2019-01-14',
+        to: today
+      }).then(response => {
+        
+    })
 }
-
 
 
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
+import {Dimensions, StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
 import Stock from './Stock'
 import StocksHeader from '../headers/StocksHeader'
 import StockModalToggle from './StockModalToggle';
@@ -9,17 +9,21 @@ import StockModalToggle from './StockModalToggle';
 
 
 class StocksContainer extends Component {
+
+    _isMounted=false
+
     constructor(props) {
         super(props)
         this.state = {
             ...this.state,
             tickers: [],
+            username: this.props.username
         }
     }
 
     grabTickers = () => {
         axios.post('http://localhost:5000/tickers', {
-            username: this.props.username
+            username: this.state.username
         }).then(response => {
             this.setState({...this.state, tickers: response.data.tickers})
         })
@@ -29,17 +33,14 @@ class StocksContainer extends Component {
         setInterval(() => this.grabTickers(), 5000)
     }
 
-    componentWillMount = () => {
-        
-    }
-
     componentDidMount = () => {
+        this._isMounted=true
         this.grabTickers()
         this.tickerInterval()
     }
 
     componentWillUnmount = () => {
-        // clearInterval(this.tickerInterval())
+        this._isMounted=false
     }
 
     render() {
@@ -54,12 +55,12 @@ class StocksContainer extends Component {
         return (
             <View style={styles.container}>
                 <StocksHeader />
-                <StockModalToggle />
+                <StockModalToggle username={this.state.username} />
 
                 <ScrollView style={styles.stocksContainer}>
                 
                     {tickerArray}
-                    <View style={{height: 35}}></View>
+                    <View style={{height:65}}></View>
                 </ScrollView>
                 
             </View>
@@ -74,16 +75,13 @@ const styles = StyleSheet.create({
         flex : 1,
         justifyContent: 'flex-start',
         backgroundColor: 'rgba(0, 0, 0, 1)',
-        paddingBottom: '50%'
+        paddingBottom: '33%'
     },
     stocksContainer : {
-        paddingTop: 55,
-        paddingBottom: 55
+        paddingTop: 70,
+        paddingBottom: 65
     },
     text : {
         color: 'white'
-    },
-    addStock: {
-        flex: 1
     }
 })

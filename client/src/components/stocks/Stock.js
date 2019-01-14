@@ -32,18 +32,34 @@ class Stock extends Component {
                 axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/chart/1d`).then(chartMinute => {
                     const stockChartIntra = chartMinute.data
                     let lengthMinute = stockChartIntra.length
+                    let minuteClose = stockChartIntra[lengthMinute-1].close
+                    if (minuteClose === null) {
+                        this.setState({
+                            ...this.state,
+                            stock: {
+                                symbol: stockCompany.symbol,
+                                name : stockCompany.companyName,
+                                date : stockChartIntra[lengthMinute - 1].date,
+                                changeOverTime : NaN,
+                                current : 'Error: returned null',
+                                monthData : monthData
+                            }
+                        })
+                    } else {
+                        this.setState({
+                            ...this.state,
+                            stock: {
+                                symbol: stockCompany.symbol,
+                                name : stockCompany.companyName,
+                                date : stockChartIntra[lengthMinute - 1].date,
+                                changeOverTime : minuteClose - stockChartDay[lengthDay-1].close, 
+                                current : minuteClose,
+                                monthData : monthData
+                            }
+                        })
+                    }
 
-                    this.setState({
-                        ...this.state,
-                        stock: {
-                            symbol: stockCompany.symbol,
-                            name : stockCompany.companyName,
-                            date : stockChartIntra[lengthMinute - 1].date,
-                            changeOverTime : stockChartIntra[lengthMinute - 1].close - stockChartDay[lengthDay-1].close, 
-                            current : stockChartIntra[lengthMinute - 1].close,
-                            monthData : monthData
-                        }
-                    })
+                    
                 }).catch(e => console.log(e))
             }).catch(e => console.log(e))
         }).catch(e => console.log(e))
