@@ -46,34 +46,27 @@ class Login extends Component {
         usernameOrEmail : usernameOrEmail,
         password : password
       }).then(response => {
-        console.log(response.data)
         if (response.data.isAuthenticated) {
           let username = response.data.user.username
           let email = response.data.user.email
-          console.log(email)
 
-          
+          this._storeLoginStatus()
 
-            this._storeLoginStatus()
+          this.setState({
+            ...this.state,
+            username: username,
+            email: email
+          })
 
-            this.setState({
-              ...this.state,
-              username: username,
-              email: email
-            })
-
-          
-
-            Navigation.push(this.props.componentId, {
-              component: {
-                name: 'AgreeToTerms',
-                passProps: {
-                  username: this.state.username,
-                  email: this.state.email
-                }
-                }
-              })
-        
+          Navigation.push(this.props.componentId, {
+            component: {
+              name: 'AgreeToTerms',
+              passProps: {
+                username: this.state.username,
+                email: this.state.email
+              }
+            }
+          })
         } else {
           this.setState({
             ...this.state,

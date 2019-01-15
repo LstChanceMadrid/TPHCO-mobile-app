@@ -60,13 +60,17 @@ app.post('/login', (req, res) => {
 
     db.one(`SELECT username, email, password FROM users WHERE username = $1 OR email = $1`, [usernameOrEmail]).then(response => {
         bcrypt.compare(password, response.password).then(result => {
-        if (result) {
-            res.json({isAuthenticated:true, user: response})
-        } else {
-            res.json({isAuthenticated: false})
-        }
+            if (result) {
+                
+                res.json({isAuthenticated:true, user: response})
+            } else {
+                let errorMessage = `this username/email does not exist or the connected password is incorrect`
+                
+                res.json({isAuthenticated: false, errorMessage: errorMessage})
+            }
         })
     }).catch(e => {
+        console.log(e.code)
         if (e.code === 0) {
             console.log('authentication denied', e)
 
@@ -150,10 +154,6 @@ app.post('/tickers', (req, res) => {
         }
     }) 
 })
-// axios.get(`https://www.tphco.com/category/latest-news/`).then(response => {
-//     let smart = JSON.parse(response.data)
-//     console.log(smart)
-// }).catch(e => console.log(e))
 
 
 app.post('/api/newsArticles', (req, res) => {
@@ -165,28 +165,17 @@ app.post('/api/newsArticles', (req, res) => {
         from: today,
         to: today
       }).then(response => {
-          console.log(response)
         res.json({articles: response})
     }).catch(e=>console.log(e))
       
 })
 
 
-
-
 console.log(new Date().toISOString().slice(0,10))
 
 const makeitup = () => {
-    let today = new Date().toISOString().slice(0,10)
-
-    newsapi.v2.everything({
-        sources: 'business-insider',
-        q: 'gas',
-        from: '2019-01-14',
-        to: today
-      }).then(response => {
-        
-    })
+    
+    db.any('DELETE FROM users WHERE username = ')
 }
 
 
