@@ -88,18 +88,30 @@ app.post('/login', (req, res) => {
 app.post('/timeStamp', (req, res) => {
     let username = req.body.username
 
-    db.one('SELECT id, username, email FROM users WHERE username = $1', [username]).then(response => {
+    db.one('SELECT * FROM users WHERE username = $1', [username]).then(response => {
 
         let username = response.username
         let email = response.email
-        let date = new Date()
-        let timestamp = new Date()
+        let company = response.company
+        let position = response.position
+        let timestamp = new Date().toLocaleTimeString(undefined, {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        })
+        let universaltimestamp = new Date().toISOString()
 
-        db.any('INSERT INTO timestamps (username, email, date, timestamp) VALUES ($1, $2, $3, $4)', [username, email, date, timestamp])
+        db.none(`UPDATE timestamps SET username = '${username}', email = '${email}', company = '${company}', position = '${position}', timestamp = timestamp || '{${timestamp}}', universaltimestamp = universaltimestamp || '{${universaltimestamp}}' WHERE username = '${username}'`).catch(e => {
+            console.log(e)
+            if (e.name === 'QueryResultError') {
+                db.one(`UPDATE timestamps SET (timestamp = timestamp || '{${timestamp}}', universaltimestamp = universaltimestamp || '{${universaltimestamp}}') WHERE username = '${username}'`).catch(e => console.log(e))
+            }
+        })
 
         res.json({username: username, email: email})
-    }).then(() => {
-
     })
 })
 
@@ -156,7 +168,14 @@ app.post('/tickers', (req, res) => {
 })
 
 app.post('/api/newsArticles', (req, res) => {
-    let today = new Date().toISOString().slice(0,10)
+    let splitDate = new Date().toLocaleTimeString(undefined, {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit'
+    }).split('/')
+
+    let today = `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`
+
     console.log('inside news arricles api')
     newsapi.v2.everything({
         sources: 'business-insider',
@@ -177,17 +196,23 @@ app.post('/api/newsArticles', (req, res) => {
 
 
 
-console.log(new Date().toISOString().slice(0,10))
-
+console.log(new Date().toLocaleTimeString(undefined, {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+}))
+console.log (new Date().toISOString())
 
 
 
 
 const makeitup = () => {
     
-    db.any(`DELETE FROM users WHERE username = `)
+    db.any(`DELETE FROM timestamps WHERE username = 'user'`)
 }
-
 
 
 app.listen(port, () => console.log('server up'))
