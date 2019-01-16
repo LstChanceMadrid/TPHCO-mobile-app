@@ -55,7 +55,7 @@ class Register extends Component {
             errorMessage : response.data.errorMessage
           })
         }
-      })
+      }).catch(e => console.log(e))
     }
 
     const pTC = 'rgba(0, 0, 0, 0.5)'

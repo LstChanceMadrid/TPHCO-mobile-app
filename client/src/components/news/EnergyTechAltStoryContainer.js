@@ -9,13 +9,13 @@ export default class EnergyTechAltStoryContainer extends Component {
         super(props)
         this.state = {
             ...this.state,
-            altStories : {}
+            altStories : []
         }
     }
     
     componentWillMount = () => {
         axios.post('http://localhost:5000/altstory', {
-            title: 'Title'
+            week: '01/08/2019'
         }).then(response => {
 
             this.setState({
@@ -27,23 +27,32 @@ export default class EnergyTechAltStoryContainer extends Component {
     
     
     render() {
+        let altStoryArray = []
 
-        let storyArr = () => {
-            let altStory = this.state.altStories
-            return (
-                <View style={styles.storyContainer}>
-                    <EnergyTechAltStory title={altStory.title}
-                    author={altStory.author}
-                    content={altStory.content}
-                    image={altStory.imageurl}
-                    source={altStory.sourceurl}/>
-                </View>
-                )
-            }
+
+
+        this.state.altStories.map((altStory, i) => {
+            let storyData = (
+            <View key={i} style={styles.storyContainer}>
+            <EnergyTechAltStory
+                title={altStory.title}
+                author={altStory.author}
+                content={altStory.content}
+                image={altStory.imageurl}
+                source={altStory.sourceurl}
+                publisher={altStory.publisher}/>
+            </View>)
+        
+            altStoryArray.push(storyData)
+
+        })
+
+        
+            
 
         return (
             <View style={styles.container}>
-                {storyArr()}
+                {altStoryArray}
                 <Text></Text>
             </View>
         )
@@ -56,7 +65,9 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        alignItems: 'stretch'
+
     },
     storyContainer: {
         alignItems: 'center',

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 
-class EnergyTechMainStory extends Component {
+class ETech20180410 extends Component {
 
     render() {
         return (
@@ -10,7 +10,7 @@ class EnergyTechMainStory extends Component {
             <View style={styles.storyWrapper}>
                 <Text style={styles.title}>TITLE</Text>
                 <Text style={styles.author}>By SOMEONE</Text>
-                <Text style={styles.paragraph}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute {'\n'} irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                <Text style={styles.paragraph}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
             </View>
             </View>
         )
@@ -18,7 +18,7 @@ class EnergyTechMainStory extends Component {
 }
 
 
-export default EnergyTechMainStory
+export default ETech20180410
 
 const styles = StyleSheet.create({
     container : {

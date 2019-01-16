@@ -125,9 +125,9 @@ app.post('/removeStock', (req, res) => {
 })
 
 app.post('/altstory', (req, res) => {
-    let title = req.body.title
+    let week = req.body.week
 
-    db.one('SELECT * FROM stories WHERE title = $1', [title]).then(response => {
+    db.any('SELECT * FROM stories WHERE week = $1', [week]).then(response => {
 
         res.json({altStory: response})
     }).catch(e => console.log(e))
@@ -155,29 +155,38 @@ app.post('/tickers', (req, res) => {
     }) 
 })
 
-
 app.post('/api/newsArticles', (req, res) => {
     let today = new Date().toISOString().slice(0,10)
-
+    console.log('inside news arricles api')
     newsapi.v2.everything({
         sources: 'business-insider',
-        q: 'gas',
+        q: 'oil',
         from: today,
         to: today
       }).then(response => {
+          console.log(response.totalResults)
         res.json({articles: response})
     }).catch(e=>console.log(e))
       
 })
 
 
+
+
+
+
+
+
 console.log(new Date().toISOString().slice(0,10))
+
+
+
+
 
 const makeitup = () => {
     
-    db.any('DELETE FROM users WHERE username = ')
+    db.any(`DELETE FROM users WHERE username = `)
 }
-
 
 
 

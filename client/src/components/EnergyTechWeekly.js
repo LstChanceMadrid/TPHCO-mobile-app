@@ -6,6 +6,7 @@ import Footer from './footers/Footer';
 import EnergyTechMainStory from './news/EnergyTechMainStory'
 import EnergyTechAltStoryContainer from './news/EnergyTechAltStoryContainer'
 import EnergyTechDisclaimer from './news/EnergyTechDisclaimer';
+import ETech20190108 from './news/weekly/ETech20190108';
 
 class EnergyTechWeekly extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class EnergyTechWeekly extends Component {
             <View style={styles.container}>
                 <ScrollView>
                     <EnergyTechHeader />
-                    <EnergyTechMainStory />
+                    <ETech20190108 />
                     <EnergyTechAltStoryContainer />
                     <EnergyTechDisclaimer />
                 </ScrollView>
