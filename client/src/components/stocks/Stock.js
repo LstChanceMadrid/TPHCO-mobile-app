@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Animated, Easing, StyleSheet, Text, View} from 'react-native';
 import axios from 'axios'
 import StockGraph from './StockGraph'
 
@@ -14,6 +14,7 @@ class Stock extends Component {
                 data : ''
             }
         }
+        this._active = new Animated.Value(0)
     }
 
     stockInfo = (symbol) => {
@@ -69,9 +70,20 @@ class Stock extends Component {
         this.stockInfo(this.props.symbol)
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        if (this.props.active !== nextProps.active) {
+            Animated.timing(this._active, {
+                duration: 300,
+                easing: Easing.bounce,
+                toValue: Number(nextProps.active),
+            }).start()
+        }
+    }
+
 
     render() {
         
+
         let monthData = this.state.stock.monthData
         let changeOverTime = this.state.stock.changeOverTime
         let name = this.state.stock.name
@@ -82,7 +94,7 @@ class Stock extends Component {
            let positiveChangeOverTime = `+${parseFloat(changeOverTime).toFixed(3)}`
            
            return (
-            <View style={styles.container}>
+            <Animated.View style={[styles.container, this._style]} onLongPress={() => console.log('i was pressed long')}>
                 <View style={styles.stockInfo}>
                     <Text style={styles.symbol}>{symbol}</Text>
 
@@ -100,13 +112,13 @@ class Stock extends Component {
                         <Text style={{color: 'white', textAlign: 'right'}}>{positiveChangeOverTime}</Text>
                     </View>
                 </View>
-            </View>
+            </Animated.View>
             )
            } else if (changeOverTime <= 0) {
             let negativeChangeOverTime = parseFloat(changeOverTime).toFixed(3)
 
             return (
-                <View style={styles.container}>
+                <Animated.View style={[styles.container, this._style]}>
                     <View style={styles.stockInfo}>
                     <Text style={styles.symbol}>{symbol}</Text>
 
@@ -124,11 +136,11 @@ class Stock extends Component {
                             <Text style={{color: 'white', textAlign: 'right'}}>{negativeChangeOverTime}</Text>
                         </View>
                     </View>
-                </View>
+                </Animated.View>
             )
         } else {
             return (
-                <View style={styles.container}>
+                <Animated.View style={[styles.container, this._style]}>
                     <View style={styles.stockInfo}>
                     <Text style={styles.symbol}>{symbol}</Text>
 
@@ -146,7 +158,7 @@ class Stock extends Component {
                             <Text style={{color: 'white', textAlign: 'right'}}>NaN</Text>
                         </View>
                     </View>
-                </View>
+                </Animated.View>
             )
         }
     }
@@ -161,7 +173,8 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 5,
         borderBottomWidth: 2,
-        borderBottomColor: 'rgba(25, 25, 25, 1)'
+        borderBottomColor: 'rgba(25, 25, 25, 1)',
+        zIndex: 1
     },
     stockInfo : {
         flex : 1,
