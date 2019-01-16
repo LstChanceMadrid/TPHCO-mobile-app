@@ -44,7 +44,7 @@ app.post('/register', (req, res) => {
 
                     res.json({isAuthenticated: true, response: response.data})
                 }).catch(e => console.log(e))
-            })
+            }).catch(e => console.log(e))
         } else {
             let errorMessage = `We're Sorry! We are having some minor difficulties. Please wait a few minutes and then try again.`
                 
@@ -112,7 +112,7 @@ app.post('/timeStamp', (req, res) => {
         })
 
         res.json({username: username, email: email})
-    })
+    }).catch(e => console.log(e))
 })
 
 app.post('/newStock', (req, res) => {

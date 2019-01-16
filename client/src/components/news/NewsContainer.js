@@ -19,7 +19,10 @@ class NewsContainer extends Component {
 
         axios.post('http://localhost:5000/api/newsArticles').then(response => {
 
-        this.setState({...this.state, articles: response.data.articles.articles})
+        this.setState({...this.state,
+            articles: response.data.articles.articles
+        })
+        
         }).catch(e => console.log(e))
     }
 
