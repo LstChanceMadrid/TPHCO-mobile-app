@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, Image, Linking, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import axios from 'axios'
 
 export default class NewsArticle extends Component {
@@ -14,20 +14,22 @@ export default class NewsArticle extends Component {
 
 
     render() {
-        console.log(this.props.article.url)
         
         let articleImages = () => {
             if (this.props.article.urlToImage === "") {
                 return <Image style={styles.image} width={Dimensions.get('screen').width/3} resizeMode={'contain'} source={require("../../../src/styles/images/tph-block.png")} />
             } else {
-                return <Image style={styles.image} width={Dimensions.get('screen').width}  resizeMode={'contain'} source={{uri : this.props.article.urlToImage}} />
+                return <Image style={styles.image} width={Dimensions.get('screen').width}  resizeMode={'contain'} source={{uri : this.props.article.urlToImage}}  />
             }
         }
 
         return (
-            <View style={styles.container} onPress={() => Linking.openURL(this.props.article.url)}>
+            <View style={styles.container}>
+
+                {/* <TouchableOpacity style={styles.imageContainer} onPress={() => Linking.openURL(this.props.article.url)}> */}
                 {articleImages()}
-                
+                {/* </TouchableOpacity> */}
+
                 <View style={styles.newsArticle}>
                     <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>{this.props.article.title}</Text>
                     <Text style={styles.story} numberOfLines={4} ellipsizeMode={'tail'}>{this.props.article.description}</Text>
@@ -43,7 +45,6 @@ let styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
         backgroundColor: 'black',
         borderBottomWidth: 2,
         borderBottomColor: 'rgba(50, 50, 50, 1)',
@@ -59,9 +60,13 @@ let styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold'
     },
+    imageContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
     image: {
         flex: 1,
-        height: '100%'
+        height: '100%',
     },
     story: {
         color: 'white'
