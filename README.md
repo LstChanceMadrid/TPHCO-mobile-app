@@ -6,4 +6,4 @@ React Native, Node.js, Express, PostgreSQL
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/29985584/51406125-d00c9d80-1b1d-11e9-907b-5f9688994367.png) <!-- .element height="50%" width="50%" -->
+![image](https://user-images.githubusercontent.com/29985584/51406125-d00c9d80-1b1d-11e9-907b-5f9688994367.png) <!-- .element height="200px" width="330px" -->
