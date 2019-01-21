@@ -107,7 +107,8 @@ _retrieveAsyncStorageLoginStatus = async () => {
                     stack: {
                         options: {
                             topBar: {
-                                visible: 'false'
+                                drawBehind: true,
+                                visible: false
                             }
                         },
                         id: 'PreLoginStack',

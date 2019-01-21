@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import {AsyncStorage, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {AsyncStorage, Image, Keyboard, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 
@@ -41,7 +41,7 @@ class Login extends Component {
     const authenticate = async () => {
       let usernameOrEmail = this.state.usernameOrEmail
       let password = this.state.password
-      
+      console.log('i clicked login')
       await axios.post('http://localhost:5000/login', {
         usernameOrEmail : usernameOrEmail,
         password : password
