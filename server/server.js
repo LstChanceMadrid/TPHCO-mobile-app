@@ -57,7 +57,7 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
     let usernameOrEmail = req.body.usernameOrEmail
     let password = req.body.password
-
+    console.log('i clicked log in')
     db.one(`SELECT username, email, password FROM users WHERE username = $1 OR email = $1`, [usernameOrEmail]).then(response => {
         bcrypt.compare(password, response.password).then(result => {
             if (result) {
