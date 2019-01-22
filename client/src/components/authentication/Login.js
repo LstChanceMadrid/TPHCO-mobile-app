@@ -3,9 +3,9 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import {AsyncStorage, Image, Keyboard, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import {URL} from '../../constants/constants'
 
-
-
+console.log(URL.LOGIN_URL)
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -41,8 +41,8 @@ class Login extends Component {
     const authenticate = async () => {
       let usernameOrEmail = this.state.usernameOrEmail
       let password = this.state.password
-      console.log('i clicked login')
-      await axios.post('http://localhost:5000/login', {
+      
+      await axios.post(URL.LOGIN_URL, {
         usernameOrEmail : usernameOrEmail,
         password : password
       }).then(response => {

@@ -20,7 +20,7 @@ class AddStock extends Component {
     render() {
 
         const addStock = () => {
-            axios.post('http://localhost:5000/newStock', {
+            axios.post('http://localhost:5000/addStock', {
                 username: this.props.username,
                 newTicker: this.state.newTicker
             }).then(response => {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Text, StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
 import Stock from './Stock'
 import StocksHeader from '../headers/StocksHeader'
 import StockModalToggle from './StockModalToggle';
@@ -55,14 +55,14 @@ class StocksContainer extends Component {
         return (
             <View style={styles.container}>
                 <StocksHeader />
+                
                 <StockModalToggle username={this.state.username} />
 
                 <ScrollView style={styles.stocksContainer}>
-                
                     {tickerArray}
+                    
                     <View style={{height:65}}></View>
                 </ScrollView>
-                
             </View>
         )
     }

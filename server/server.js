@@ -115,7 +115,7 @@ app.post('/timeStamp', (req, res) => {
     }).catch(e => console.log(e))
 })
 
-app.post('/newStock', (req, res) => {
+app.post('/addStock', (req, res) => {
     let handleTicker = req.body.handleTicker
     let username = req.body.username
 

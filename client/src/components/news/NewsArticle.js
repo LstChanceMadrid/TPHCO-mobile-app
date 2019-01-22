@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Dimensions, Image, Linking, StyleSheet, Text, View} from 'react-native';
-import axios from 'axios'
 
 export default class NewsArticle extends Component {
 
@@ -14,7 +13,6 @@ export default class NewsArticle extends Component {
 
 
     render() {
-        console.log(this.props.article.url)
         
         let articleImages = () => {
             if (this.props.article.urlToImage === "") {

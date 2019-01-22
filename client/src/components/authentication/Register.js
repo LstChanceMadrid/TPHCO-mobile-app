@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import axios from 'axios'
+import {URL} from '../../constants/constants'
 
 
 class Register extends Component {
@@ -38,7 +39,7 @@ class Register extends Component {
 
     const authenticate = async () => {
 
-      await axios.post('http://localhost:5000/register', {
+      await axios.post(URL.REGISTER_URL, {
         username : this.state.username,
         email : this.state.email,
         firstName : this.state.firstName,

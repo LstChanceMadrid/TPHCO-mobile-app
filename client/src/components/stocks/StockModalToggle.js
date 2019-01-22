@@ -49,7 +49,7 @@ class stockModalToggle extends Component {
         }
 
         const addStock = () => {
-            axios.post('http://localhost:5000/newStock', {
+            axios.post('http://localhost:5000/addStock', {
                 username: this.props.username,
                 handleTicker: this.state.handleTicker.toUpperCase()
             }).then(response => {

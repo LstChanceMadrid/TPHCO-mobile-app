@@ -19,8 +19,9 @@ class Stock extends Component {
     stockInfo = (symbol) => {
         axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`).then(company => {
             const stockCompany = company.data
-
+            
             axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/chart/1m`).then(chartDay => {
+                
                 const stockChartDay = chartDay.data
                 const lengthDay = stockChartDay.length
                 let monthData = []
@@ -30,6 +31,7 @@ class Stock extends Component {
                 }
 
                 axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/chart/1d`).then(chartMinute => {
+                    
                     const stockChartIntra = chartMinute.data
                     let lengthMinute = stockChartIntra.length
                     let minuteClose = stockChartIntra[lengthMinute-1].close
@@ -77,7 +79,7 @@ class Stock extends Component {
         let name = this.state.stock.name
         let symbol = this.state.stock.symbol
         let current = this.state.stock.current
-
+        
         if (changeOverTime > 0) {
            let positiveChangeOverTime = `+${parseFloat(changeOverTime).toFixed(3)}`
            
