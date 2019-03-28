@@ -2,6 +2,6 @@
     "name": "tphco",
     "version": "0.0.1",
     "scripts": {
-        "dev": "cd server && node server.js"
+        "dev": "cd server && npm start"
     }
 }
