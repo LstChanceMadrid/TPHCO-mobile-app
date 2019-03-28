@@ -10,8 +10,8 @@ const pgp = require('pg-promise')();
 const secret = require('./secrets')
 
 const app = express()
-const DATABASE_URL = secret.databaseSecret
-const db = pgp(DATABASE_URL);
+// const DATABASE_URL = secret.databaseSecret
+const db = pgp(process.env.DATABASE_URL+'ssl=true');
 const newsapi = new NewsAPI(secret.newsAPISecret);
 const port = process.env.PORT || 5000 || 3000
 const saltRounds = 10;
