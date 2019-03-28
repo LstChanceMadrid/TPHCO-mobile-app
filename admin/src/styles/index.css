@@ -1,0 +1,286 @@
+* {
+  box-sizing: border-box
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: rgba(0, 55, 80, 1)
+}
+
+p {
+  color: white
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.container {
+  padding: 1em;
+}
+
+/*
+    ----- Navigation
+*/
+
+.header {
+  background-color: green;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center
+}
+
+.nav-button {
+  background: yellow;
+  padding: 1em;
+}
+
+.nav-text {
+  color: blue
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+  max-width: 1080px;
+  height: auto;
+  pointer-events: none;
+  padding: 1em
+}
+
+/*
+    ----- Stock page
+*/
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 25%;
+  max-width: 768px;
+  padding: 1em;
+}
+
+  .input-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+  }
+
+  .label {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    color: rgba(0, 55, 80, 1);
+    padding: 1em;
+    font-weight: bold;
+  }
+
+  .input {
+    display: flex;
+    height: 2em;
+    padding-left: 1em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    font-size: 0.75em;
+  }
+
+.button {
+  font-size: 1em;
+  padding: 0.5em;
+  color: rgba(0, 55, 80, 1);
+}
+
+.stock-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: content;
+  justify-content: space-evenly
+}
+
+  .stocks-header {
+    width: 100%
+  }
+
+  .stock-item-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    border: 1px solid rgba(0, 0, 0, 1);
+    flex: 33%;
+    min-width: 200px;
+    max-width: 300px;
+    justify-content: center
+  }
+
+  .new-stock {
+    width: 100%
+  }
+
+/*
+    ----- New Etech weekly issue page
+*/
+
+.issue-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.issue-item {
+  border: 1px solid black;
+  flex: 33%;
+  min-width: 200px;
+}
+
+.listitem-input {
+  display: flex;
+  flex: 0%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.issue-listitem {
+  display: flex;
+  width: 100%;
+}
+
+.energy-tech-label {
+  color: white;
+  padding: 1em;
+}
+
+.issue-input {
+  max-width: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 1em;
+}
+
+.new-issue-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+  .issue-title {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center
+  }
+
+  .issue-week-author {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 1em;
+  }
+
+    .issue-week {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
+      align-items: center
+    }
+    
+    .issue-author {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
+      align-items: center
+    }
+
+  .issue-image-paragraph {
+    width: 100%;
+    padding: 1em;
+  }
+
+    .issue-image {
+      display: flex;
+      width: 100%
+    }
+    
+    .issue-paragraph {
+      width: 100%;
+      padding: 1em;
+    }
+
+    .paragraph-label {
+      width: 100%;
+      padding: 1em;
+    }
+
+    .paragraph-input {
+      width: 100%;
+      margin-top: 1em;
+    }
+
+    .image-input {
+      display: flex;
+      flex: 0%;
+      padding-left: 1em;
+    }
+
+/*
+    ----- Events page
+*/
+
+.event-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  flex: 33%;
+  justify-content: space-evenly;
+  max-width: 480px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .label {
+    font-size: 1.5em;
+  }
+}
