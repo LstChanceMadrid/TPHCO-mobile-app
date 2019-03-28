@@ -12,7 +12,8 @@ const secret = require('./secrets')
 const app = express()
 // const DATABASE_URL = secret.databaseSecret
 const db = pgp(process.env.DATABASE_URL+'ssl=true');
-const newsapi = new NewsAPI(secret.newsAPISecret);
+// const newsapi = new NewsAPI(secret.newsAPISecret);
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 const port = process.env.PORT || 5000 || 3000
 const saltRounds = 10;
 
