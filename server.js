@@ -296,8 +296,10 @@ app.post('/forgotPassword', (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: `${secret.recoveryEmailAccount}`,
-                pass: `${secret.recoveryEmailPassword}`
+                // user: `${secret.recoveryEmailAccount}`,
+                // pass: `${secret.recoveryEmailPassword}`
+                user: `${process.env.RECOVERY_EMAIL_ACCOUNT}`,
+                pass: `${process.env.RECOVERY_EMAIL_PASSWORD}`
             }
         })
 
