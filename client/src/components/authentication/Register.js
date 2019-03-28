@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Navigation } from 'react-native-navigation';
+
 import axios from 'axios'
-import {URL} from '../../constants/constants'
+
+import { connect } from 'react-redux'
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import { styles } from './styles/styles'
+import { URL } from '../../constants/constants'
 
 
 class Register extends Component {
@@ -37,8 +40,8 @@ class Register extends Component {
 
   render() {
 
+    // checks database for a user
     const authenticate = async () => {
-
       await axios.post(URL.REGISTER_URL, {
         username : this.state.username,
         email : this.state.email,
@@ -58,14 +61,16 @@ class Register extends Component {
         }
       }).catch(e => console.log(e))
     }
-
+    // placeholder text color
     const pTC = 'rgba(0, 0, 0, 0.5)'
     
     return (
       <View style={styles.container}>
-        <View style={styles.registerContainer}>
+        <View style={styles.credentialContainer}>
           <Text style={styles.title}>Register</Text>
+
           <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
+          
           <TextInput style={styles.input} placeholder="Username*" autoCapitalize='none' placeholderTextColor={pTC} onChangeText={(username) => this.setState({...this.state, username})}></TextInput>
 
           <TextInput style={styles.input} placeholder="Email*" autoCapitalize='none' placeholderTextColor={pTC} onChangeText={(email) => this.setState({...this.state, email})}></TextInput>
@@ -83,13 +88,13 @@ class Register extends Component {
           <TextInput style={styles.input} placeholder="Password*" autoCapitalize='none' placeholderTextColor={pTC} secureTextEntry={true} onChangeText={(password) => this.setState({...this.state, password})}></TextInput>
 
           <TouchableOpacity style={styles.registerButton} onPress={() => authenticate()}>
-            <Text style={styles.registerButtonText}>Register</Text>
+            <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
           
           <Text style={styles.orLogin}>or <Text style={styles.login} onPress={() => {this.leaveScreen()}}>Login</Text></Text>
         </View>
 
-        <Image style={styles.logo} resizeMode={'contain'} source={require('../../styles/images/tphco.png')} />
+        <Image style={styles.logo} resizeMode={'contain'} source={require('../../assets/tphco.png')} />
       </View>
     );
   }
@@ -103,79 +108,3 @@ const mapStateToProps = state => {
 
 
 export default connect(mapStateToProps)(Register)
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 30, 40, 1)',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  registerContainer: {
-    borderRadius: 25,
-    backgroundColor: 'white',
-    padding: 20,
-    paddingTop: 40,
-    paddingBottom: 10
-  },
-  title: {
-    textAlign: 'center'
-  },
-  nameContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 20
-  },
-  name : {
-    width: '45%',
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 1)',
-    paddingLeft: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    fontSize: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 1)',
-    paddingLeft: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    fontSize: 20,
-    marginTop: 20
-  },
-  registerButton: {
-    backgroundColor: 'blue',
-    width: 120,
-    borderRadius: 5,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 20
-  },
-  registerButtonText: {
-    color: 'white',
-    fontSize: 20,
-    paddingTop: 5,
-    paddingBottom: 5,
-    textAlign: 'center'
-  },
-  orLogin: {
-    textAlign: 'right'
-  },
-  login: {
-    color: 'blue'
-  },
-  logo: {
-    width: 300,
-    height: 200,
-    tintColor: 'rgba(255, 255, 255, 1)',
-    marginLeft: 'auto',
-    marginRight: 'auto'
-  },
-  errorMessage: {
-    color: 'red',
-    textAlign: 'center'
-  }
-})
