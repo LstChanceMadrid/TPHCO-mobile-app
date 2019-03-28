@@ -17,11 +17,11 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 const port = process.env.PORT || 5000 || 3000
 const saltRounds = 10;
 
-console.log(process.env.DATABASE_URL)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
+app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => res.send('Hello World!'))
  
