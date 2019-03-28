@@ -1,1 +1,1 @@
-web: cd ./admin && npm start
+web: npm run dev
