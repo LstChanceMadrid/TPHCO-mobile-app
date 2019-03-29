@@ -1,2 +1,2 @@
-web: cd admin && npm run-script start
-worker: npm run server
+web: npm run server
+worker: cd admin && npm run-script start
