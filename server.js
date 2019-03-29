@@ -7,7 +7,7 @@ const express = require('express')
 const NewsAPI = require('newsapi');
 const nodemailer = require('nodemailer')
 const pgp = require('pg-promise')();
-const secret = require('./secrets')
+// const secret = require('./secrets')
 
 const app = express()
 // const DATABASE_URL = secret.databaseSecret
