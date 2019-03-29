@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use('/favicon.ico/:id', express.static('public'))
+// app.use('/favicon.ico/:id', express.static('public'))
 
 app.get('/', (req, res) => res.send('Hello World!'))
  
