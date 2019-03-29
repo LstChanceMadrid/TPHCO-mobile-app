@@ -11,7 +11,7 @@ const secret = require('./secrets')
 
 const app = express()
 // const DATABASE_URL = secret.databaseSecret
-const db = pgp(DATABASE_URL);
+const db = pgp(process.env.DATABASE_URL);
 // const newsapi = new NewsAPI(secret.newsAPISecret);
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 const port = process.env.PORT || 5000 || 3000
