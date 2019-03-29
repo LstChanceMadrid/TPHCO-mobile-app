@@ -1,1 +1,1 @@
-web: npm run admin
+web: npm run server
