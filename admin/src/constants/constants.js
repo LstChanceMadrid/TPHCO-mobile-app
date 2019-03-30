@@ -1,4 +1,7 @@
-const domain = 'http://localhost:5000'
+// const domain = 'http://localhost:5000'
+
+const domain = 'https://tphco.herokuapp.com'
+
 
 export const URL = {
     // authentication
