@@ -1,2 +1,2 @@
 web: npm run server
-web: cd admin && npm run build
+web: cd admin && npm run start
