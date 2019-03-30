@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { TODAY } from '../../../../../constants/time'
+import { URL } from '../../../../../constants/constants'
 
 export default class NewIssue extends Component {
     constructor(props) {
@@ -63,7 +64,7 @@ export default class NewIssue extends Component {
     }
 
     addIssue = () => {
-        axios.post('http://localhost:5000/admin/addIssue', {
+        axios.post(URL.ADMIN_ADD_ISSUE_URL, {
             issue: this.state.issue
         }).then(response => {
             this.setState({
