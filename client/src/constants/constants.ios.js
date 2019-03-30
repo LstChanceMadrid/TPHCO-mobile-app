@@ -13,7 +13,7 @@ export const URL = {
     //energy tech weekly
     ALT_STORY_URL: domain + '/altstory',
     ENERGY_TECH_WEEKLY_URL: domain + '/energyTechWeekly',
-    ENERGY_TECH_WEEKLY__TITLES_URL: domain + '/energyTechWeeklyTitles',
+    ENERGY_TECH_WEEKLY_TITLES_URL: domain + '/energyTechWeeklyTitles',
     ADMIN_ENERGY_TECH_WEEKLY_URL: domain + '/admin/energyTechWeekly',
     ADMIN_ADD_ISSUE_URL: domain + '/admin/addIssue',
 

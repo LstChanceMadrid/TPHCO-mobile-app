@@ -64,7 +64,7 @@ class Login extends Component {
             this.props.setAltStories(response.data.altStory)
         }).catch(e => console.log(e))
 
-        axios.post(URL.ENERGY_TECH_WEEKLY__TITLES_URL).then(response => {
+        axios.post(URL.ENERGY_TECH_WEEKLY_TITLES_URL).then(response => {
           this.props.setIssueTitles(response.data.title)
         }).catch(e => console.log(e))
 
