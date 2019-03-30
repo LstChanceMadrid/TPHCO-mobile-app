@@ -6,6 +6,7 @@ const crypto = require('crypto')
 const express = require('express')
 const NewsAPI = require('newsapi');
 const nodemailer = require('nodemailer')
+const path = require('path')
 const pgp = require('pg-promise')();
 // const secret = require('./secrets')
 
@@ -21,7 +22,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
-// app.use('/favicon.ico/:id', express.static('public'))
+
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+
+
 
 app.get('/', (req, res) => res.send('Hello World!'))
  
