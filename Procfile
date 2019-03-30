@@ -1,2 +1,1 @@
-web: cd admin && npm run build
-worker: npm run server
+web: npm run server & cd admin && npm run build
