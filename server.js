@@ -8,33 +8,34 @@ const NewsAPI = require('newsapi');
 const nodemailer = require('nodemailer')
 const path = require('path')
 const pgp = require('pg-promise')();
+// ----- dev
 // const secret = require('./secrets')
 
 const app = express()
+
+// ----- dev
 // const DATABASE_URL = secret.databaseSecret
-const db = pgp(process.env.DATABASE_URL);
+// const db = pgp(DATABASE_URL):
 // const newsapi = new NewsAPI(secret.newsAPISecret);
+
+// ----- prod
+const db = pgp(process.env.DATABASE_URL);
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
+
 const port = process.env.PORT || 5000 || 3000
 const saltRounds = 10;
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
-
-
-
 app.use(express.static(path.join(__dirname, 'admin/build')));
+
+// app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'admin/build', 'index.html'));
 });
 
-
-
-
-// app.get('/', (req, res) => res.send('Hello World!'))
- 
 app.post('/register', (req, res) => {
 
     let username = req.body.username
