@@ -1,5 +1,5 @@
 # TPHCO React Native App
-# Now in the Apple App Store1
+# Now in the Apple App Store!
 [https://www.tphco.com/](https://www.tphco.com/)
 
 ---
